@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1542654815767.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1602718940",
+    "id" : "6A9C1675",
+    "lastKnownWriteTime" : 1542656634,
+    "last_content_update" : 1542656634024,
+    "path" : "~/Documents/Github/coursera/coursera home_work.Rmd",
+    "project_path" : "coursera home_work.Rmd",
+    "properties" : {
+        "chunk_output_type" : "console",
+        "cursorPosition" : "24,0",
+        "scrollLine" : "1",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

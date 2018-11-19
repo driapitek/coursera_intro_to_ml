@@ -1,0 +1,26 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+```{r}
+library("tidyverse")
+```
+
+```{r}
+titan %>%
+  group_by(Pclass) %>%
+  summarise(n = n())
+```
+
+```{r}
+(mean_age <- mean(titan$Age, na = TRUE))
+
+(median_age <- median(titan$Age, na = TRUE))
+
+```
+
+```{r}
+head(titan)
+```
+
