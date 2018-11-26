@@ -6,6 +6,7 @@ editor_options:
 ```{r}
 library("tidyverse")
 library("tidyr")
+library("stringr")
 ```
 
 # Неделя 1
@@ -28,31 +29,15 @@ library("tidyr")
 
 Ответ на каждое задание — текстовый файл, содержащий ответ в первой строчке. Обратите внимание, что отправляемые файлы не должны содержать перевод строки в конце. Данный нюанс является ограничением платформы Coursera. Мы работаем над тем, чтобы убрать это ограничение.
 
-## Ответы
+## Задание 6
 
 ```{r}
-titan %>%
-  group_by(Pclass) %>%
-  summarise(n = n())
+titan <- read_csv("titanic.csv")
+name <- select(titan, Name, Sex)
 ```
 
 ```{r}
-(mean_age <- mean(titan$Age, na = TRUE))
-
-(median_age <- median(titan$Age, na = TRUE))
-
-```
-
-```{r}
-head(titan)
-```
-
-```{r}
-titan %>% separate(col, into, sep = ",")
-```
-
-
-```{r}
+# Для иллюстрации того как работает функция extract
 NAME <- c('John Doe','Peter Gynn','Jolie Hope-Douglas', 'Muhammad Arnab Halwai')
 TITLE <- c("assistant", "manager", "assistant", "specialist")
 tteam<- data.frame(NAME, TITLE)
@@ -60,23 +45,55 @@ extract(tteam, NAME, c("FirstName", "LastName"), "([^ ]+) (.*)")
 ```
 
 ```{r}
-extract(name, name$Name, c("first", "last"), "([^ ]+) (.*)")
-```
-
-```{r}
-titan
-```
-
-```{r}
-quiz1 <- separate(titan, Name, into = c("first", "last"), sep = "([^,]+) (.*)")
-
-```
-
-```{r}
-quiz1 %>%
+quiz1 <- separate(
+  titan, Name, into = c("first", "last"), sep = "([^,]+) (.*)") %>%
   group_by(first, Sex) %>%
   summarise(n = n()) %>%
   arrange(desc(n))
 ```
+
+
+
+### Описание присваивания имени
+
+Using the example:
+
+Baclini, Mrs. Solomon (Latifa Qurban)
+
+Mrs. indicates that she is married
+
+Solomon is the name of her husband. This is a (old-ish) custom where wives can be referred to by their husbands name. For instance, if Jane Smith was married to John Smith, she could be referred to as Mrs. John Smith.
+
+Latifa is her first name.
+
+Qurban is her "maiden" name. This is the family/last name that she had before getting married.
+
+Baclini is her (married) family/last name, i.e. the last name of her husband Solomon.
+
+For the example
+
+Baclini, Miss. Marie Catherine (daughter of above)
+
+Miss indicates that she is unmarried, so parsing into first/last names becomes a bit easier.
+
+In this case Marie is her first name, Catherine is her middle name and Baclini is the family/last name.
+
+### Порядок действий
+
+Изящным решением будет разработка правила полностью и всегда применимого для парсинга имён в подобной записи. 
+
+Решением "В лоб" будет локальный для этой задачи поиск.
+
+1. Отфильтровать фрейм от мужского пола
+
+2. Если в строке есть скобочка взять слово после скобочки, скобочку удалить. Иначе взять первое слово после точки с пробелом
+
+3.
+
+```{r}
+x <- c("apple", "banana", "pear")
+str_view(x, "an")
+```
+
 
 
